@@ -6,7 +6,7 @@ import json
 
 #CONFIG THE BOT / CHAIN 
 path_to_daemon = '/home/administrador/go/bin/gaiad'  #  Put the path to the exec
-path_to_cli = '/home/administrador/go/bin/gaiacli'  # Path to cli 
+path_to_cli = '/home/administrador/go/bin/gaiacli '  # Path to cli 
 url_api = 'http://localhost:36657/'   # Url to API
 cosmos_address='cosmos1ft3qq5hragz807n55ajq8qa7ymvvszzujg09q8' 
 
@@ -19,13 +19,13 @@ bot.owner = "Tips and bugs to: @D00hanPijo"
 @bot.command("getblockcount")
 def getblockcount_command(chat, message, args):
     """Check this to know if your fullnode-masternode is synced"""
-    get_block = os.popen(path_to_cli + " gaiacli status").read()
+    get_block = os.popen(path_to_cli + 'status').read()
     loaded_json = json.loads(get_block)
-    
+   
     #gaiacli status | jq '.sync_info.latest_block_height'
 
-    print("Result:", get_block['sync_info']['latest_block_height'])
-    block = str(get_block['sync_info']['latest_block_height'])
+    print("Result:", loaded_json['sync_info']['latest_block_height'])
+    block = str(loaded_json['sync_info']['latest_block_height'])
     chat.send("The current Block is "+block)
 #==========================================================================
 @bot.command("getlist")
