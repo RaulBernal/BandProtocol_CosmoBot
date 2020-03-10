@@ -5,28 +5,27 @@ import botogram
 import json
 
 #CONFIG THE BOT / CHAIN 
-path_to_bin = "/home/bitcanna/bcna-1.0.1-unix/"  #  Put your own without final 
+path_to_daemon = '/home/administrador/go/bin/gaiad'  #  Put the path to the exec
+path_to_cli = '/home/administrador/go/bin/gaiacli'  # Path to cli 
+url_api = 'http://localhost:36657/'   # Url to API
+cosmos_address='cosmos1ft3qq5hragz807n55ajq8qa7ymvvszzujg09q8' 
 
 #About Telegram API with Botogram
-token = '3333333:AAABBBgggghjkjhkkkkkkkkkkkkk' #  Put your own token
+token = '594662433:AAExBX2J53O050MoQU52q2kCuXJ_8hyX2ow' #  Put your own token
 bot = botogram.create(token)
-bot.about = "Balance BOT for your own fullnode-masternode. \nIf you found any bugs or have suggestions for new functionalities...\nPlease contact us!"
-bot.owner = "@MrSteelBCNA and/or @Raul_BitCannaES"
-#==========================================================================
-@bot.command("getbalance")
-def getbalance_command(chat, message, args):
-    """Show the balance of your wallet"""
-    get_balance = os.popen(path_to_bin + "/bitcanna-cli getbalance").read()
-    print("Result:", get_balance)
-    balance = str(get_balance)
-    chat.send("The current balance is "+balance+" BCNA")
+bot.about = "CosmoBot for get info about chain. \nIf you found any bugs or have suggestions for new functionalities...\nPlease contact us!"
+bot.owner = "Tips and bugs to: @D00hanPijo"
 #==========================================================================
 @bot.command("getblockcount")
 def getblockcount_command(chat, message, args):
     """Check this to know if your fullnode-masternode is synced"""
-    get_block = os.popen(path_to_bin + "/bitcanna-cli getblockcount").read()
-    print("Result:", get_block)
-    block = str(get_block)
+    get_block = os.popen(path_to_cli + " gaiacli status").read()
+    loaded_json = json.loads(get_block)
+    
+    #gaiacli status | jq '.sync_info.latest_block_height'
+
+    print("Result:", get_block['sync_info']['latest_block_height'])
+    block = str(get_block['sync_info']['latest_block_height'])
     chat.send("The current Block is "+block)
 #==========================================================================
 @bot.command("getlist")
