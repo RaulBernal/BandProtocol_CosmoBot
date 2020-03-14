@@ -4,14 +4,9 @@ import os
 import botogram
 import json
 
-#CONFIG THE BOT / CHAIN 
-path_to_daemon = '/home/administrador/go/bin/gaiad'  #  Put the path to the exec
-path_to_cli = '/home/administrador/go/bin/gaiacli '  # Path to cli 
-url_api = 'http://localhost:36657/'   # Url to API
-cosmos_address='cosmos1ft3qq5hragz807n55ajq8qa7ymvvszzujg09q8' 
+from config import token, path_to_daemon, path_to_cli, url_api, cosmos_address
 
-#About Telegram API with Botogram
-token = '594662433:AAExBX2J53O050MoQU52q2kCuXJ_8hyX2ow' #  Put your own token
+
 bot = botogram.create(token)
 bot.about = "CosmoBot for get info about chain. \nIf you found any bugs or have suggestions for new functionalities...\nPlease contact us!"
 bot.owner = "Tips and bugs to: @D00hanPijo"
