@@ -1,8 +1,10 @@
-#CONFIG THE BOT / CHAIN 
-path_to_daemon = '/home/administrador/go/bin/gaiad'  #  Put the path to the exec
-path_to_cli = '/home/administrador/go/bin/gaiacli '  # Path to cli 
-url_api = 'http://localhost:36657/'   # Url to API
-cosmos_address='cosmos1ft3qq5hragz807n55ajq8qa7ymvvszzujg09q8' 
+#CONFIG THE BOT / CHAIN: example for a Regen Testnet
+path_to_daemon = '/home/administrador/go/bin/rgnxd'  #  Put the path to the exec
+path_to_cli = '/home/administrador/go/bin/rgnxdcli '  # Path to cli 
+url_api = 'http://localhost:26657/'   # Url to API
+cosmos_address='xrn:1mxnuednhzvh99aadgrgde53ss7vzslv477rzth' 
+chain_id='kontraua'
 
-#About Telegram API with Botogram
+
+#About Telegram API with Botogram - create with BotFather bot
 token = '594662433:AAExBRaUl3O050MoQU5qwe2q2kCuXJ_8hyX2ow' #  Put your own token
