@@ -1,4 +1,5 @@
-#python3
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import datetime
 import os
 import botogram
@@ -23,42 +24,29 @@ def getblockcount_command(chat, message, args):
     block = str(loaded_json['sync_info']['latest_block_height'])
     chat.send("The current Block is "+block)
 #==========================================================================
-@bot.command("getlist")
-def getlist_command(chat, message, args):
-    """This will show the last Transactions in your wallet"""
-    msg = ""
-    get_last = os.popen(path_to_bin + "/bitcanna-cli listtransactions").read()
-    loaded_json = json.loads(get_last)
-    for tx in loaded_json:
-        date_time =  datetime.datetime.fromtimestamp(tx['blocktime']).strftime('%c')
-        msg = msg + tx['category'] + " BCNA: " + str(tx['amount']) + " at " + date_time + "\n"
-    print (msg)
-    chat.send(msg)
-#==========================================================================
 @bot.command("getbalance")
 def getlist_command(chat, message, args):
     """This will show the balance of your config address"""
     msg = ""
-    get_last = os.popen(path_to_bin + "/bitcanna-cli listtransactions").read()
+    get_last = os.popen(path_to_cli + ' query account ' + cosmos_address + ' -o json').read()
     loaded_json = json.loads(get_last)
-    for tx in loaded_json:
-        date_time =  datetime.datetime.fromtimestamp(tx['blocktime']).strftime('%c')
-        msg = msg + tx['category'] + " BCNA: " + str(tx['amount']) + " at " + date_time + "\n"
-    print (msg)
+    denom = loaded_json["value"]["coins"][0]["denom"]
+    amount = loaded_json["value"]["coins"][0]["amount"]
+    msg = 'You have ' + amount + ' ' + denom
     chat.send(msg)
 #==========================================================================
 @bot.command("getvalidators")
 def getmasternode_command(chat, message, args):
     """This will show the online VALIDATORS"""
-    get_masternodes = os.popen(path_to_bin + "/bitcanna-cli masternode list").read()
-    loaded_json = json.loads(get_masternodes)
+    get_validators = os.popen(path_to_cli + ' query staking validators -o json').read()
+    loaded_json = json.loads(get_validators)
     msg = ""
     count = 0
-    chat.send ("List of online MASTERNODES") 
-    print ("List of online MASTERNODES")
+    chat.send ("List of online VALIDATORS") 
+    print ("List of online VALIDATORS")
     print ("==========================")
     for tx in loaded_json:
-        msg = msg + "IP: " +  tx + "\n"
+        msg = msg + '*' + str(tx["description"]["moniker"]) + '* - Jailed: ' + str(tx["jailed"]) + '\n' 
         count = count + 1
     print (msg + "\nTotal: " + str(count))
     chat.send(msg + "\nTotal: " + str(count))
@@ -82,8 +70,6 @@ def getpeers_command(chat, message, args):
         f.write(msg+ "\nTotal: " + str(count))
     chat.send_file(path=file_peers, caption='This file contains all peers connected to your masternode/fullnode')
 #==========================================================================
-
-#==============================================================================
 
 # This runs the bot, until ctrl+c is pressed
 if __name__ == "__main__":
