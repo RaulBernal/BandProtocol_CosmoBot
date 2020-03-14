@@ -13,7 +13,7 @@ bot.owner = "Tips and bugs to: @D00hanPijo"
 #==========================================================================
 @bot.command("getblockcount")
 def getblockcount_command(chat, message, args):
-    """Check this to know if your fullnode-masternode is synced"""
+    """Check this to know if your fullnode-validator is synced"""
     get_block = os.popen(path_to_cli + 'status').read()
     loaded_json = json.loads(get_block)
    
@@ -35,9 +35,21 @@ def getlist_command(chat, message, args):
     print (msg)
     chat.send(msg)
 #==========================================================================
-@bot.command("getmasternode")
+@bot.command("getbalance")
+def getlist_command(chat, message, args):
+    """This will show the balance of your config address"""
+    msg = ""
+    get_last = os.popen(path_to_bin + "/bitcanna-cli listtransactions").read()
+    loaded_json = json.loads(get_last)
+    for tx in loaded_json:
+        date_time =  datetime.datetime.fromtimestamp(tx['blocktime']).strftime('%c')
+        msg = msg + tx['category'] + " BCNA: " + str(tx['amount']) + " at " + date_time + "\n"
+    print (msg)
+    chat.send(msg)
+#==========================================================================
+@bot.command("getvalidators")
 def getmasternode_command(chat, message, args):
-    """This will show the online MASTERNODES"""
+    """This will show the online VALIDATORS"""
     get_masternodes = os.popen(path_to_bin + "/bitcanna-cli masternode list").read()
     loaded_json = json.loads(get_masternodes)
     msg = ""
@@ -70,24 +82,7 @@ def getpeers_command(chat, message, args):
         f.write(msg+ "\nTotal: " + str(count))
     chat.send_file(path=file_peers, caption='This file contains all peers connected to your masternode/fullnode')
 #==========================================================================
-@bot.command("getunspent")
-def getunspent_command(chat, message, args):
-    """This will show amount to transfer in command-line to another address"""
 
-    total = 0
-    msg = ""
-    get_last = os.popen(path_to_bin + "/bitcanna-cli listunspent").read()
-    loaded_json = json.loads(get_last)
-    chat.send ("Unspent inputs to transfer\n======================")
-    for tx in loaded_json:
-        if  tx['amount'] == 3.30000000: # > 2.6 for fullnode
-            msg = msg + "Mint: " + str(tx['spendable']) + " BCNA: " + str(tx['amount']) + "\n"
-            total = total + tx['amount']
-        else:
-            msg =  msg + 'Other: '  + str(tx['spendable']) + " BCNA: " + str(tx['amount']) + "\n"
-    print(msg) #Is printed in console , could be saved in a file and sent by telegram
-    #chat.send (msg) #if there are a lot of inputs Telegram can't handle in a message
-    chat.send ("Make your transfer with " + (str(total)) + " BCNA")
 #==============================================================================
 
 # This runs the bot, until ctrl+c is pressed
