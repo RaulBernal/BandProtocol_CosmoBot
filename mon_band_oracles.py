@@ -28,7 +28,7 @@ def getblockcount_command(chat, message, args):
 def getlist_command(chat, message, args):
     """This will show the balance of your config address"""
     msg = ""
-    get_last = os.popen(path_to_cli + ' query account ' + band_address + ' -o json').read()
+    get_last = os.popen(path_to_cli + 'query staking delegations ' + band_address + ' -o json | jq .[0].balance.amount').read()
     loaded_json = json.loads(get_last)
     denom = loaded_json["value"]["coins"][0]["denom"]
     amount = loaded_json["value"]["coins"][0]["amount"]
@@ -54,11 +54,11 @@ def getmasternode_command(chat, message, args):
 @bot.command("sendfile")  # sample to build a textfile and send it by telegram
 def getpeers_command(chat, message, args):
     """This will show the online NODES (both)"""
-    get_nodes = os.popen(path_to_bin + "/bitcanna-cli getpeerinfo").read()
+    get_nodes = os.popen(path_to_cli + " status").read()
     loaded_json = json.loads(get_nodes)
     msg = ""
     count = 0
-    file_peers = os.path.join(path_to_bin + '/peers.txt') 
+    file_peers = os.path.join(path_to_cli + '/peers.txt') 
     chat.send ("Building a list...") 
     print ("List of online NODES")
     print ("==========================")
