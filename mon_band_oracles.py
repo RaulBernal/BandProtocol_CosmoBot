@@ -5,11 +5,11 @@ import os
 import botogram
 import json
 
-from config_band import token, path_to_daemon, path_to_cli, url_api, band_address, bandvaloper_address
+from config_band import token, path_to_daemon, path_to_cli, url_api, band_address, bandvaloper_address, chain_id
 
 
 bot = botogram.create(token)
-bot.about = "CosmoBot for get info about chain. \nIf you found any bugs or have suggestions for new functionalities...\nPlease contact us!"
+bot.about = "Mon_Band_Oracles for get info about Band chain. \nIf you found any bugs or have suggestions for new functionalities...\nPlease contact us!"
 bot.owner = "Tips and bugs to: @D00hanPijo"
 #==========================================================================
 @bot.command("getblockcount")
