@@ -93,7 +93,7 @@ def checker(bot, shared):
          #something to do if is down
          #starting = os.popen(path_to_daemon + " start").read()
     oracle_running =  os.popen(path_to_cli + 'query oracle validator ' + bandvaloper_address + ' -o json | jq .is_active').read()
-    if oracle_running == "true":
+    if oracle_running.find('true') == 0:
         print("Hey! your ORACLES are running!")
     else:
          for chat in shared["subs"]:
