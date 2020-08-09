@@ -32,7 +32,6 @@ def getlist_command(chat, message, args):
     loaded_json = json.loads(get_last)
     denom = loaded_json["denom"]
     amount = loaded_json["amount"]
-    amount = get_last
     msg = 'You have ' + amount + denom
     chat.send(msg)
 #==========================================================================
