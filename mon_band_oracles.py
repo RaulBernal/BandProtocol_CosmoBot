@@ -92,7 +92,7 @@ def checker(bot, shared):
             bot.chat(chat).send("Hey! your BAND validator is down!")
          #something to do if is down
          #starting = os.popen(path_to_daemon + " start").read()
-    oracle_running =  os.popen(path_to_cli + 'query oracle validator' + bandvaloper_address + ' -o json | jq .is_active').read()
+    oracle_running =  os.popen(path_to_cli + 'query oracle validator ' + bandvaloper_address + ' -o json | jq .is_active').read()
     if oracle_running == "true":
         print("Hey! your ORACLES are running!")
     else:
