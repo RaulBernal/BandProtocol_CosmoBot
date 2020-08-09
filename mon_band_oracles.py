@@ -30,8 +30,8 @@ def getlist_command(chat, message, args):
     msg = ""
     get_last = os.popen(path_to_cli + 'query staking delegations ' + band_address + ' -o json').read()
     loaded_json = json.loads(get_last)
-    denom = loaded_json[0]["denom"]
-    amount = loaded_json[0]["amount"]
+    denom = loaded_json[0]["balance"]["denom"]
+    amount = loaded_json[0]["balance"]["amount"]
     amount = get_last
     msg = 'You have ' + amount + denom
     chat.send(msg)
