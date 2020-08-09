@@ -80,14 +80,14 @@ def subscribe_command(shared, chat, message, args):
     subs = shared["subs"]
     subs.append(chat.id)
     shared["subs"] = subs
+    
 
 @bot.timer(3600) #every hour
-def checker(bot, shared):
+def checker(bot, shared, chat):
     get_info = os.popen(path_to_cli + 'status | jq .sync_info.catching_up').read()
     if get_info.find('false') == 0: #if found false is synced
-        
         print('Daemon is running')
-        bot.chat(chat.id).send(starting)
+        bot.chat(chat.id).send('Band validator is working!')
     else:    
          for chat in shared["subs"]:
             bot.chat(chat).send("Hey! your BAND validator is down!")
