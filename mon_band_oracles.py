@@ -28,10 +28,10 @@ def getblockcount_command(chat, message, args):
 def getlist_command(chat, message, args):
     """This will show the balance of your config address"""
     msg = ""
-    get_last = os.popen(path_to_cli + 'query staking delegations ' + band_address + ' -o json').read()
+    get_last = os.popen(path_to_cli + 'query staking delegations ' + band_address + ' -o json | jq .[0].balance').read()
     loaded_json = json.loads(get_last)
-    denom = loaded_json["balance"]["denom"]
-    amount = loaded_json["balance"]["amount"]
+    denom = loaded_json["denom"]
+    amount = loaded_json["amount"]
     amount = get_last
     msg = 'You have ' + amount + denom
     chat.send(msg)
