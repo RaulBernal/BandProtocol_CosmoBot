@@ -51,8 +51,17 @@ def getmasternode_command(chat, message, args):
     print (msg + "\nTotal: " + str(count))
     chat.send(msg + "\nTotal: " + str(count))
 #==========================================================================
+@bot.command("getyodastatus")
+def getyodastatus_command(chat, message, args):
+    """This will check status of ORACLES"""
+    oracle_running =  os.popen(path_to_cli + 'query oracle validator ' + bandvaloper_address + ' -o json | jq .is_active').read()
+    if oracle_running.find('true') == 0:
+        chat.send("Hey! your ORACLES are running!")
+    else:
+        chat.send("Hey! your ORACLES are down!")
+#==========================================================================
 @bot.command("sendtxyoda")
-def getmasternode_command(chat, message, args):
+def sendtxyoda_command(chat, message, args):
     """This will send a ACTIVATE tx for ORACLES"""
     tx_activate = os.popen('echo -e ' + priv_key + '\n' + priv_key + '\n | andcli tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y'  query staking validators -o json').read()
     loaded_json = json.loads(tx_activate)
