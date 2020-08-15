@@ -70,13 +70,8 @@ def sendtxyoda_command(chat, message, args):
     child.sendline (priv_key) #Send password
     child.expect ("Enter keyring passphrase:") #input expected
     child.sendline (priv_key) #Send password 
-    child.interact()
-    print(child)
-    
-    #tx_activate = os.popen('echo -e ' + priv_key + '\n' + priv_key + '\n | ' + path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json').read()
-    #loaded_json = json.loads(tx_activate)
-    #tx=loaded_json["txhash"]
-    #chat.send ('TX sent. Check the explorer: \n' + url_explorer+'/tx/'+tx) 
+    child.interact() 
+    chat.send ('TX sent. Check if is running \n/getyodastatus) 
 #==========================================================================
 @bot.command("sendfile")  # sample to build a textfile and send it by telegram
 def getpeers_command(chat, message, args):
