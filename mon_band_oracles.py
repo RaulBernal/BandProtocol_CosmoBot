@@ -5,7 +5,7 @@ import os
 import botogram
 import json
 
-from config_band import token, path_to_daemon, path_to_cli, url_api, band_address, bandvaloper_address, chain_id
+from config_band import token, path_to_daemon, path_to_cli, url_api, band_address, bandvaloper_address, chain_id, priv_key, wallet_name, url_explorer
 
 
 bot = botogram.create(token)
@@ -50,6 +50,14 @@ def getmasternode_command(chat, message, args):
         count = count + 1
     print (msg + "\nTotal: " + str(count))
     chat.send(msg + "\nTotal: " + str(count))
+#==========================================================================
+@bot.command("sendtxyoda")
+def getmasternode_command(chat, message, args):
+    """This will send a ACTIVATE tx for ORACLES"""
+    tx_activate = os.popen('echo -e ' + priv_key + '\n' + priv_key + '\n | andcli tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y'  query staking validators -o json').read()
+    loaded_json = json.loads(tx_activate)
+    tx=loaded_json["txhash"]
+    chat.send ('TX sent. Check the explorer: \n' + url_explorer+'/tx/'+tx) 
 #==========================================================================
 @bot.command("sendfile")  # sample to build a textfile and send it by telegram
 def getpeers_command(chat, message, args):
@@ -97,7 +105,7 @@ def checker(bot, shared):
         print("Hey! your ORACLES are running!")
     else:
          for chat in shared["subs"]:
-            bot.chat(chat).send("Hey! your BAND validator is down!")
+            bot.chat(chat).send("Hey! your ORACLES are down!")
          #to-do 
 #==============================================================================
 
