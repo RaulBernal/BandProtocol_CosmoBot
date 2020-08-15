@@ -1,7 +1,7 @@
 # CosmoBot.py
 Simple Bot to run commands in a Cosmos Node
 
-# Mon_Band_Ocracles.py
+# mon_band_oracles.py
 Simple Bot to monitorize Band chain and Oracles services and reporters
 
 **You need for running this script:**
