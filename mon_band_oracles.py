@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
-import botogram
+import botogram #pip3 install botogram2
 import json
+import pexpect  #pip3 install pexpect before run the first time
 
 from config_band import token, path_to_daemon, path_to_cli, url_api, band_address, bandvaloper_address, chain_id, priv_key, wallet_name, url_explorer
 
@@ -63,10 +64,18 @@ def getyodastatus_command(chat, message, args):
 @bot.command("sendtxyoda")
 def sendtxyoda_command(chat, message, args):
     """This will send a ACTIVATE tx for ORACLES"""
-    tx_activate = os.popen('echo -e ' + priv_key + '\n' + priv_key + '\n | ' + path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json').read()
-    loaded_json = json.loads(tx_activate)
-    tx=loaded_json["txhash"]
-    chat.send ('TX sent. Check the explorer: \n' + url_explorer+'/tx/'+tx) 
+    child = pexpect.spawn(path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json') #command
+    child.expect ("Enter keyring passphrase:") #input expected
+    child.sendline (wallet_password) #Send password
+    child.expect ("Enter keyring passphrase:") #input expected
+    child.sendline (wallet_password) #Send password 
+    child.interact()
+    
+    
+    #tx_activate = os.popen('echo -e ' + priv_key + '\n' + priv_key + '\n | ' + path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json').read()
+    #loaded_json = json.loads(tx_activate)
+    #tx=loaded_json["txhash"]
+    #chat.send ('TX sent. Check the explorer: \n' + url_explorer+'/tx/'+tx) 
 #==========================================================================
 @bot.command("sendfile")  # sample to build a textfile and send it by telegram
 def getpeers_command(chat, message, args):
