@@ -71,7 +71,7 @@ def sendtxyoda_command(chat, message, args):
     child.expect ("Enter keyring passphrase:") #input expected
     child.sendline (priv_key) #Send password 
     child.interact() 
-    chat.send ('TX sent. Check if is running \n/getyodastatus) 
+    chat.send ('TX sent. Check if is running \n/getyodastatus') 
 #==========================================================================
 @bot.command("sendfile")  # sample to build a textfile and send it by telegram
 def getpeers_command(chat, message, args):
