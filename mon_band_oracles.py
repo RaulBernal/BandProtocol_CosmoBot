@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import datetime
 import os
-import sys
 import botogram #pip3 install botogram2
 import json
 import pexpect  #pip3 install pexpect before run the first time
@@ -72,8 +71,7 @@ def sendtxyoda_command(chat, message, args):
     child.expect ("Enter keyring passphrase:") #input expected
     child.sendline (priv_key) #Send password 
     child.interact()
-    child.logfile = sys.stdout
-    print(child.logfile)
+    print(child)
     
     #tx_activate = os.popen('echo -e ' + priv_key + '\n' + priv_key + '\n | ' + path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json').read()
     #loaded_json = json.loads(tx_activate)
