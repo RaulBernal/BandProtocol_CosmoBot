@@ -64,11 +64,12 @@ def getyodastatus_command(chat, message, args):
 @bot.command("sendtxyoda")
 def sendtxyoda_command(chat, message, args):
     """This will send a ACTIVATE tx for ORACLES"""
-    child = pexpect.spawn(path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json') #command
+    command = path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json'
+    child = pexpect.spawn(command) #command
     child.expect ("Enter keyring passphrase:") #input expected
-    child.sendline (wallet_password) #Send password
+    child.sendline (priv_key) #Send password
     child.expect ("Enter keyring passphrase:") #input expected
-    child.sendline (wallet_password) #Send password 
+    child.sendline (priv_key) #Send password 
     child.interact()
     
     
