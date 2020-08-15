@@ -20,13 +20,13 @@ https://core.telegram.org/bots#6-botfather
 
 **2) The linux masternode/fullnode side**
 
-Download the script balance_node.py
+Download the script mon_band_oracles.py and config_band.py
 
-When you run the script balance_node.py the first time it indicates that you need the Botogram library
+When you run the script mon_band_oracles.py the first time it indicates that you need the Botogram library
 
-$ python3 balance_node.py
+$ python3 mon_band_oracles.py
 Traceback (most recent call last):
-  File "balance_bot.py", line 4, in <module>
+  File "mon_band_oracles.py", line 4, in <module>
     import botogram
 ImportError: No module named 'botogram'
 
@@ -44,14 +44,14 @@ https://github.com/python-botogram/botogram
 https://stackoverflow.com/questions/6587507/how-to-install-pip-with-python-3
 
 
-Change your own setting, edit with nano or vi:  nano balance_node.py
+Change your own setting, edit with nano or vi:  nano band_config.py 
 * You must change the path to the binaries
 * Must also replace your API Token 
 
 
 Execute it!!!
 
-$ python3 balance_node.py
+$ python3 mon_band_oracles.py
 
 12:49.27 -   INFO    - Your bot is now running!
 12:49.27 -   INFO    - Press Ctrl+C to exit.
