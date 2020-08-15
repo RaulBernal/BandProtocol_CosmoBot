@@ -71,8 +71,7 @@ def sendtxyoda_command(chat, message, args):
     child.expect ("Enter keyring passphrase:") #input expected
     child.sendline (priv_key) #Send password 
     child.interact()
-    child.logfile = sys.stdout
-    print(child.logfile)
+    print(child.before)
     
     #tx_activate = os.popen('echo -e ' + priv_key + '\n' + priv_key + '\n | ' + path_to_cli + ' tx oracle activate --from ' + wallet_name + '--chain-id ' + chain_id + ' -y  -o json').read()
     #loaded_json = json.loads(tx_activate)
