@@ -9,7 +9,7 @@ Simple Bot to monitorize Band chain and Oracles services and reporters
 * Linux system with a fullnode/masternode running and synced
 * Python3 and pip3 installed 
 * Botogram
-* Set your config in the script (Token and route to binaries)
+* Set your config at file config_band.py (Token and route to binaries)
 
 # Step-by-step guide:
 
@@ -57,3 +57,5 @@ $ python3 balance_node.py
 12:49.27 -   INFO    - Press Ctrl+C to exit.
 
 **3) Search the bot in Telegram (use the @alias) and /start it**
+Type /help for receive all commands descriptions
+Type /subscribe to receive alerts when ORACLES are down or node is UNSYNCED
