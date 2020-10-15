@@ -34,6 +34,7 @@ The easy way is:
 
 * $ sudo apt-get install python3-pip
 * $ sudo pip3 install botogram2
+* $ sudo pip3 install pexpect #another module to install
 
 If the last command fails, you can check this info:
 
