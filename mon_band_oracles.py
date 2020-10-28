@@ -104,7 +104,7 @@ def checker(bot, shared):
     if get_power.find('"0"') == 0: #if found false is jailed
         print('Validator is JAILED!!!')
         for chat in shared["subs"]:
-            bot.chat(chat).send("Hey! your BAND validator is down!")
+            bot.chat(chat).send("Hey! your BAND validator is JAILED!")
 
     else:    
         print('Validator have got POWER')
