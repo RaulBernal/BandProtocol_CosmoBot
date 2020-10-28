@@ -11,4 +11,4 @@ wallet_name='novy'
 url_explorer='https://www.cosmoscan.io/validator/' + bandvaloper_address
 
 #About Telegram API with Botogram - create with BotFather bot
-token = '1185870800:AAGSqBiz5-5LarTTJbV7soNHzGEedXlfggM' #  Put your own token
+token = '1195870800:AAGSqBiz0_5LarTTJbV7soNHzGEedXlfggM' #  Put your own token
