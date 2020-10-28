@@ -1,14 +1,14 @@
 #CONFIG THE BOT / CHAIN:  put a space after the path 
-path_to_daemon = '/usr/local/bin/bandd '  #  Put the path to the daemon 
-path_to_cli = '/usr/local/bin/bandcli '  # Path to cli 
-path_to_yoda = '/usr/local/bin/yoda '   # Path to Yoda bin
-url_api = 'http://localhost:6657/'   # Url to API
-band_address='band1lt6pj70vrvfd5dxxx95hrv5e8y5zesf00e2a9q'   #Band autodelegate address
-bandvaloper_address='bandvaloper1lt6pj70vrvfd5dxxx95hrv5e8y5zesf0r0w7qt' #Band Validator address
-chain_id='band-guanyu-testnet2'
-priv_key='wallet-privkey'
-wallet_name='wallet'
-url_explorer='https://guanyu-testnet2.cosmoscan.io'
+path_to_daemon = '/home/band/go/bin/bandd '  #  Put the path to the daemon 
+path_to_cli = '/home/band/go/bin/bandcli '  # Path to cli 
+path_to_yoda = '/home/band/go/bin/yoda '   # Path to Yoda bin
+url_api = 'http://:26657/'   # Url to API
+band_address='band1unfg2zhnssl07tql8d85zc6rx7zsfs5qmutec8'   #Band autodelegate address
+bandvaloper_address='bandvaloper1unfg2zhnssl07tql8d85zc6rx7zsfs5qh206av' #Band Validator address
+chain_id='band-guanyu-mainnet'
+priv_key='----'
+wallet_name='novy'
+url_explorer='https://www.cosmoscan.io/validator/' + bandvaloper_address
 
 #About Telegram API with Botogram - create with BotFather bot
-token = '594662433:AAExBRajajaja0MoQU5qwe2q2kCuXJ_8hyX2ow' #  Put your own token
+token = '1185870800:AAGSqBiz5-5LarTTJbV7soNHzGEedXlfggM' #  Put your own token
