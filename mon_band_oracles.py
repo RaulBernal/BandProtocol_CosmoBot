@@ -73,24 +73,10 @@ def sendtxyoda_command(chat, message, args):
     child.interact() 
     chat.send ('TX sent. Check if is running \n/getyodastatus') 
 #==========================================================================
-@bot.command("sendfile")  # sample to build a textfile and send it by telegram
-def getpeers_command(chat, message, args):
-    """This will show the online NODES (both)"""
-    get_nodes = os.popen(path_to_cli + " status").read()
-    loaded_json = json.loads(get_nodes)
-    msg = ""
-    count = 0
-    file_peers = os.path.join(path_to_cli + '/peers.txt') 
-    chat.send ("Building a list...") 
-    print ("List of online NODES")
-    print ("==========================")
-    for tx in loaded_json:
-        msg = msg + "IP: " +  tx["addr"] + ", version: " + tx["subver"] + "\n"
-        count = count + 1 
-    print (msg + "\nTotal: " + str(count))
-    with open(file_peers, 'w') as f:
-        f.write(msg+ "\nTotal: " + str(count))
-    chat.send_file(path=file_peers, caption='This file contains all peers connected to your masternode/fullnode')
+@bot.command("explorer")  # sample to build a textfile and send it by telegram
+def explorer_command(chat, message, args):
+    chat.send ('Click at the URL: ' + url_explorer)
+
 #==========================================================================
 @bot.prepare_memory          #Automated actions
 def init(shared):
@@ -114,6 +100,15 @@ def checker(bot, shared):
             bot.chat(chat).send("Hey! your BAND validator is down!")
          #something to do if is down
          #starting = os.popen(path_to_daemon + " start").read()
+    get_power = os.popen(path_to_cli + 'status | jq .validator_info.voting_power').read()
+    if get_power.find('"0"') == 0: #if found false is jailed
+        print('Validator is JAILED!!!')
+        for chat in shared["subs"]:
+            bot.chat(chat).send("Hey! your BAND validator is down!")
+
+    else:    
+        print('Validator have got POWER')
+    
     oracle_running =  os.popen(path_to_cli + 'query oracle validator ' + bandvaloper_address + ' -o json | jq .is_active').read()
     if oracle_running.find('true') == 0:
         print("Hey! your ORACLES are running!")
